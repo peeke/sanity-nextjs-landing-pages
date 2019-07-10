@@ -22,12 +22,7 @@ export default {
       name: 'image',
       type: 'figure',
       title: 'Image',
-    },
-    {
-      name: 'cta',
-      type: 'cta',
-      title: 'Call to action',
-    },
+    }
   ],
   preview: {
     select: {

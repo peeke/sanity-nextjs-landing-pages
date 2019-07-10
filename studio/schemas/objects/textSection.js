@@ -4,16 +4,6 @@ export default {
   title: 'Text',
   fields: [
     {
-      name: 'label',
-      type: 'string',
-      title: 'Label',
-    },
-    {
-      name: 'heading',
-      type: 'string',
-      title: 'Heading',
-    },
-    {
       name: 'text',
       type: 'portableText',
       title: 'Text',
@@ -21,13 +11,12 @@ export default {
   ],
   preview: {
     select: {
-      heading: 'heading',
+      text: 'text',
     },
-    prepare({ heading }) {
-      return {
-        title: `${heading}`,
-        subtitle: 'Text section',
-      };
-    },
+    prepare({ text }) {
+      const flattenedString = text[0].children.map(child => child.text).join('')
+      const preview = flattenedString.length > 100 ? flattenedString.slice(0, 100) + '&hellip;' : flattenedString
+      return { title: preview };
+    }
   },
 };

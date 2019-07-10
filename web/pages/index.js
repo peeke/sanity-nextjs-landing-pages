@@ -1,21 +1,34 @@
-import PropTypes from 'prop-types'
-import React from 'react'
-import Layout from '../components/Layout'
+import React, {Component} from 'react'
+import Link from 'next/link'
+import groq from 'groq'
 
-class IndexPage extends React.Component {
-  static propTypes = {
-    config: PropTypes.object
+import Layout from '../components/Layout'
+import client from '../client'
+
+const pageQuery = groq`
+*[_type == "recipe"]{...}
+`
+
+class Home extends Component {
+
+  static async getInitialProps () {
+    return {
+      recipes: await client.fetch(pageQuery)
+    }
   }
 
   render () {
-    const {config} = this.props
+    const { recipes } = this.props
+
     return (
-      <Layout config={config}>
-        <h1>No route set</h1>
-        <h2>Setup automatic routes in sanity or custom routes in next.config.js</h2>
+      <Layout>
+        <h1>Recipes</h1>
+        {recipes.map(({ _id, slug, title }) => (
+          <li><Link href="/recipe/[slug]" as={'/recipe/' + slug.current} key={_id}>{ title }</Link></li>
+        ))}
       </Layout>
     )
   }
 }
 
-export default IndexPage
+export default Home

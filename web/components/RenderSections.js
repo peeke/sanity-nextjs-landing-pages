@@ -1,5 +1,4 @@
 import React, {Fragment} from 'react'
-import PropTypes from 'prop-types'
 import {upperFirst} from 'lodash'
 import * as SectionComponents from './sections'
 
@@ -33,16 +32,6 @@ function RenderSections (props) {
         return <SectionComponent {...section} key={section._key} />
       })}
     </Fragment>
-  )
-}
-
-RenderSections.propTypes = {
-  sections: PropTypes.arrayOf(
-    PropTypes.shape({
-      _type: PropTypes.string,
-      _key: PropTypes.string,
-      section: PropTypes.instanceOf(PropTypes.object)
-    })
   )
 }
 

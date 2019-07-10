@@ -1,15 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import imageUrlBuilder from '@sanity/image-url'
-import styles from './ImageSection.module.css'
+import styles from './ImageSection.css'
 import client from '../../client'
 import SimpleBlockContent from '../SimpleBlockContent'
-import Cta from '../Cta'
 
 const builder = imageUrlBuilder(client)
 
 function ImageSection (props) {
-  const {heading, label, text, image, cta} = props
+  const {heading, label, text, image} = props
 
   if (!image) {
     return null
@@ -33,7 +32,6 @@ function ImageSection (props) {
               <div className={styles.label}>{label}</div>
               <h2 className={styles.title}>{heading}</h2>
               {text && <SimpleBlockContent blocks={text} />}
-              {cta && cta.route && <Cta {...cta} />}
             </div>
           </div>
         </figcaption>
