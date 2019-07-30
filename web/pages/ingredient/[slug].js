@@ -1,19 +1,13 @@
 import React, { Component } from "react";
-import groq from "groq";
-import client from "client";
 import Layout from "components/Layout";
 import SimpleBlockContent from "components/SimpleBlockContent";
-
-const pageQuery = groq`
-*[_type == $type && slug.current == $slug][0]{
-  title,
-  description
-}
-`;
+import { getIngredientDetailBySlug, getIngredientDetailById } from "services/ingredients";
 
 class Recipe extends Component {
   static async getInitialProps({ query: { slug } }) {
-    return client.fetch(pageQuery, { type: "ingredient", slug });
+    return slug.startsWith("drafts.")
+      ? getIngredientDetailById(slug)
+      : getIngredientDetailBySlug(slug);
   }
 
   static defaultProps = {

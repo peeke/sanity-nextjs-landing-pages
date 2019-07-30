@@ -4,30 +4,11 @@ import client from "client";
 import Link from "next/link";
 import Layout from "components/Layout";
 import SimpleBlockContent from "components/SimpleBlockContent";
-
-const pageQuery = groq`
-*[_type == $type && slug.current == $slug][0]{
-  title,
-  description,
-  duration {
-    preperationTime,
-    waitingTime
-  },
-  ingredients[] {
-    "title": ingredient->title,
-    "slug": ingredient->slug.current,
-    amount,
-    unit,
-  },
-  steps[] {
-    text
-  }
-}
-`;
+import { getRecipeDetailBySlug, getRecipeDetailById } from "services/recipes";
 
 class Recipe extends Component {
   static async getInitialProps({ query: { slug } }) {
-    return client.fetch(pageQuery, { type: "recipe", slug });
+    return slug.startsWith("drafts.") ? getRecipeDetailById(slug) : getRecipeDetailBySlug(slug);
   }
 
   static defaultProps = {
@@ -35,7 +16,7 @@ class Recipe extends Component {
   };
 
   render() {
-    const { title, description, duration, ingredients, steps } = this.props;
+    const { title, description, duration = {}, ingredients = [], steps = [] } = this.props;
 
     return (
       <Layout>
