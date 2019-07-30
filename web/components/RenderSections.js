@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react'
 import {upperFirst} from 'lodash'
-import * as SectionComponents from './sections'
+import * as SectionComponents from 'components/sections'
 
 function resolveSections (section) {
   // eslint-disable-next-line import/namespace

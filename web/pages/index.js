@@ -1,34 +1,37 @@
-import React, {Component} from 'react'
-import Link from 'next/link'
-import groq from 'groq'
+import React, { Component } from "react";
+import Link from "next/link";
+import groq from "groq";
 
-import Layout from '../components/Layout'
-import client from '../client'
+import Layout from "components/Layout";
+import client from "client";
 
 const pageQuery = groq`
 *[_type == "recipe"]{...}
-`
+`;
 
 class Home extends Component {
-
-  static async getInitialProps () {
+  static async getInitialProps() {
     return {
       recipes: await client.fetch(pageQuery)
-    }
+    };
   }
 
-  render () {
-    const { recipes } = this.props
+  render() {
+    const { recipes } = this.props;
 
     return (
       <Layout>
         <h1>Recipes</h1>
         {recipes.map(({ _id, slug, title }) => (
-          <li><Link href="/recipe/[slug]" as={'/recipe/' + slug.current} key={_id}>{ title }</Link></li>
+          <li key={_id}>
+            <Link href="/recipe/[slug]" as={"/recipe/" + slug.current}>
+              <a>{title}</a>
+            </Link>
+          </li>
         ))}
       </Layout>
-    )
+    );
   }
 }
 
-export default Home
+export default Home;

@@ -1,7 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import BlockContent from '@sanity/block-content-to-react'
-import client from '../client'
+import client from 'client'
 
 const {projectId, dataset} = client.config()
 
@@ -13,11 +12,9 @@ function SimpleBlockContent (props) {
     return null
   }
 
-  return <BlockContent blocks={blocks} projectId={projectId} dataset={dataset} />
-}
-
-SimpleBlockContent.propTypes = {
-  blocks: PropTypes.arrayOf(PropTypes.object)
+  return typeof blocks === 'string'
+    ? <p>{blocks}</p>
+    : <BlockContent blocks={blocks} projectId={projectId} dataset={dataset} />
 }
 
 export default SimpleBlockContent

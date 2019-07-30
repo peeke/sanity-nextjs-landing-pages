@@ -1,0 +1,5 @@
+.Container {
+  max-width: var(--wide-container);
+  padding: 0 2em;
+  margin: 0 auto;
+}

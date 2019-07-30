@@ -6,17 +6,18 @@ export default {
     {
       name: 'text',
       type: 'portableText',
-      title: 'Text',
-    },
+      title: 'Text'
+    }
   ],
   preview: {
     select: {
-      text: 'text',
+      text: 'text'
     },
     prepare({ text }) {
       const flattenedString = text[0].children.map(child => child.text).join('')
-      const preview = flattenedString.length > 100 ? flattenedString.slice(0, 100) + '&hellip;' : flattenedString
-      return { title: preview };
+      const preview =
+        flattenedString.length > 100 ? flattenedString.slice(0, 100) + '&hellip;' : flattenedString
+      return { title: preview }
     }
-  },
-};
+  }
+}

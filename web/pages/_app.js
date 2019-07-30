@@ -1,7 +1,7 @@
 import React from 'react'
 import BaseApp, {Container} from 'next/app'
-import '../styles/shared.css'
-import '../styles/layout.css'
+import 'styles/shared.css'
+import 'styles/layout.css'
 
 class App extends BaseApp {
   render () {
