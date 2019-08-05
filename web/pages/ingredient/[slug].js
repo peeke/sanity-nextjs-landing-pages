@@ -20,7 +20,7 @@ class Recipe extends Component {
     return (
       <Layout>
         <h1>{title}</h1>
-        <SimpleBlockContent blocks={description} />
+        <SimpleBlockContent blocks={description.blocks} />
       </Layout>
     );
   }

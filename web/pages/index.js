@@ -1,18 +1,14 @@
 import React, { Component } from "react";
 import Link from "next/link";
-import groq from "groq";
 
 import Layout from "components/Layout";
-import client from "client";
 
-const pageQuery = groq`
-*[_type == "recipe"]{...}
-`;
+import { getRecipes } from "services/recipes";
 
 class Home extends Component {
   static async getInitialProps() {
     return {
-      recipes: await client.fetch(pageQuery)
+      recipes: await getRecipes()
     };
   }
 
@@ -24,7 +20,7 @@ class Home extends Component {
         <h1>Recipes</h1>
         {recipes.map(({ _id, slug, title }) => (
           <li key={_id}>
-            <Link href="/recipe/[slug]" as={"/recipe/" + slug.current}>
+            <Link href="/recipe/[slug]" as={"/recipe/" + slug}>
               <a>{title}</a>
             </Link>
           </li>

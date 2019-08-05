@@ -1,18 +1,12 @@
 export default {
-  name: 'ingredient',
-  title: 'Ingredient',
+  name: 'menu',
+  title: 'Menu',
   type: 'document',
   fields: [
     {
       name: 'title',
       title: 'Title',
       type: 'string'
-    },
-    {
-      name: 'description',
-      title: 'Description',
-      type: 'portableText',
-      description: "Describe the recipe with all the flair you've got."
     },
     {
       name: 'slug',
@@ -22,6 +16,16 @@ export default {
       options: {
         source: 'title'
       }
+    },
+    {
+      name: 'items',
+      type: 'array',
+      title: 'Menu items',
+      of: [
+        {
+          type: 'menuItem'
+        }
+      ]
     }
   ]
 }

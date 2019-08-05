@@ -18,19 +18,19 @@ export default {
       name: 'unit',
       title: 'Unit',
       type: 'string'
-    },
+    }
   ],
   preview: {
     select: {
       ingredient: 'ingredient.title',
       amount: 'amount',
-      unit: 'unit',
+      unit: 'unit'
     },
     prepare({ ingredient, amount, unit }) {
       return {
         title: `${ingredient} (${amount}${unit})`,
         subtitle: 'Ingredient'
-      };
+      }
     }
-  },
-};
+  }
+}

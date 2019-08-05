@@ -12,9 +12,7 @@ export default {
       name: 'slug',
       type: 'slug',
       title: 'Slug',
-      validation: Rule => [
-        Rule.required()
-      ],
+      validation: Rule => [Rule.required()],
       options: {
         source: 'title'
       }
@@ -25,13 +23,27 @@ export default {
       title: 'Preparation time',
       description: 'How long does it take to prepare?',
       fields: [
-        { type: 'number', title: 'Time preparing', name: 'preperationTime' },
-        { type: 'number', title: 'Time waiting', name: 'waitingTime' }
-      ]
+        {
+          type: 'number',
+          title: 'Time preparing',
+          name: 'preperationTime',
+          validation: Rule => [Rule.required()]
+        },
+        {
+          type: 'number',
+          title: 'Time waiting',
+          name: 'waitingTime',
+          validation: Rule => [Rule.required()]
+        }
+      ],
+      options: {
+        collapsible: true,
+        collapsed: true
+      }
     },
     {
       name: 'description',
-      type: 'portableText',
+      type: 'portableTextSimple',
       title: 'Description',
       description: "Describe the recipe with all the flair you've got."
     },
@@ -59,24 +71,30 @@ export default {
       options: {
         layout: 'tags'
       },
-      of: [
-        { type: 'string' }
-      ]
+      of: [{ type: 'string' }]
+    },
+    {
+      name: 'categories',
+      type: 'array',
+      title: 'Type',
+      options: {
+        list: [
+          { value: 'default', title: 'Regular' },
+          { value: 'vegetarian', title: 'Vegetarian' },
+          { value: 'vegan', title: 'Vegan' }
+        ]
+      },
+      of: [{ type: 'string' }]
     },
     {
       name: 'steps',
       type: 'array',
       title: 'Preparation steps',
       options: {
+        sortable: true,
         editModal: 'popover'
       },
-      of: [
-        {
-          name: 'recipeStep',
-          title: 'Preperation step',
-          type: 'textSection'
-        }
-      ]
+      of: [{ type: 'portableText' }]
     }
   ]
 }

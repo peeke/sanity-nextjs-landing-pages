@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  padding-left: 0;
+  list-style-type: none;
+
+  & > li {
+    position: relative;
+  }
+
+  & a {
+    display: block;
+  }
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding-left: 0;
+  list-style-type: none;
+  background-color: white;
+  box-shadow: 2px 0 1rem rgba(0, 0, 0, 0.33);
+}
+
+.menuItem {
+  padding: 1rem;
+  white-space: nowrap;
+}
+
+.menuItem:hover + .submenu,
+.submenu:hover {
+  display: block;
+}

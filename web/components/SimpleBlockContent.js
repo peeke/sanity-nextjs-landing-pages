@@ -1,20 +1,30 @@
-import React from 'react'
-import BlockContent from '@sanity/block-content-to-react'
-import client from 'client'
+import React from "react";
+import BlockContent from "@sanity/block-content-to-react";
+import client from "client";
 
-const {projectId, dataset} = client.config()
+import Figure from "components/shared/Figure";
 
-function SimpleBlockContent (props) {
-  const {blocks} = props
+const { projectId, dataset } = client.config();
 
-  if (!blocks) {
-    console.error('Missing blocks')
-    return null
-  }
+function SimpleBlockContent(props) {
+  const { blocks } = props;
 
-  return typeof blocks === 'string'
-    ? <p>{blocks}</p>
-    : <BlockContent blocks={blocks} projectId={projectId} dataset={dataset} />
+  if (!blocks) return null;
+
+  const serializers = {
+    types: {
+      figure: ({ node: props }) => <Figure {...props} />
+    }
+  };
+
+  return (
+    <BlockContent
+      blocks={blocks}
+      serializers={serializers}
+      projectId={projectId}
+      dataset={dataset}
+    />
+  );
 }
 
-export default SimpleBlockContent
+export default SimpleBlockContent;

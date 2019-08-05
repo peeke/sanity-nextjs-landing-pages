@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import groq from "groq";
-import client from "client";
+import isObjectEmpty from "utils/isObjectEmpty";
 import Link from "next/link";
 import Layout from "components/Layout";
 import SimpleBlockContent from "components/SimpleBlockContent";
@@ -8,7 +7,14 @@ import { getRecipeDetailBySlug, getRecipeDetailById } from "services/recipes";
 
 class Recipe extends Component {
   static async getInitialProps({ query: { slug } }) {
-    return slug.startsWith("drafts.") ? getRecipeDetailById(slug) : getRecipeDetailBySlug(slug);
+    const published = await getRecipeDetailBySlug(slug);
+    if (!isObjectEmpty(published)) return published;
+
+    const preview = await getRecipeDetailById(slug);
+    if (!isObjectEmpty(preview)) return preview;
+
+    console.log("404!");
+    return {};
   }
 
   static defaultProps = {
@@ -21,7 +27,7 @@ class Recipe extends Component {
     return (
       <Layout>
         <h1>{title}</h1>
-        <SimpleBlockContent blocks={description} />
+        <SimpleBlockContent blocks={description.blocks} />
         <p>
           Preparation time: {duration.preperationTime} minutes
           <br />
@@ -43,11 +49,13 @@ class Recipe extends Component {
 
         <h2>Preparation</h2>
         <ol>
-          {steps.map(({ text }, i) => (
-            <li key={i}>
-              <SimpleBlockContent blocks={text} />
-            </li>
-          ))}
+          {steps.map((step, i) => {
+            return (
+              <li key={i}>
+                <SimpleBlockContent {...step} />
+              </li>
+            );
+          })}
         </ol>
       </Layout>
     );

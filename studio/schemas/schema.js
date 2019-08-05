@@ -5,21 +5,18 @@ import createSchema from 'part:@sanity/base/schema-creator'
 import schemaTypes from 'all:part:@sanity/base/schema-type'
 
 // Document types
-import recipe from './documents/recipe'
 import ingredient from './documents/ingredient'
-import recipeIngredient from './objects/recipeIngredient'
+import menu from './documents/menu'
+import recipe from './documents/recipe'
 
 // Object types
-import embedHTML from './objects/embedHTML'
 import figure from './objects/figure'
 import internalLink from './objects/internalLink'
 import link from './objects/link'
+import menuItem from './objects/menuItem'
 import portableText from './objects/portableText'
-import simplePortableText from './objects/simplePortableText'
-
-// Landing page sections
-import imageSection from './objects/imageSection'
-import textSection from './objects/textSection'
+import portableTextSimple from './objects/portableTextSimple'
+import recipeIngredient from './objects/recipeIngredient'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -27,16 +24,15 @@ export default createSchema({
   // Then proceed to concatenate our our document type
   // to the ones provided by any plugins that are installed
   types: schemaTypes.concat([
-    embedHTML,
     figure,
-    imageSection,
     ingredient,
     internalLink,
     link,
+    menu,
+    menuItem,
     portableText,
+    portableTextSimple,
     recipe,
-    recipeIngredient,
-    simplePortableText,
-    textSection
+    recipeIngredient
   ])
 })

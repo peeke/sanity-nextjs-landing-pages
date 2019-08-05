@@ -3,8 +3,7 @@ import { MdDashboard, MdSettings } from 'react-icons/lib/md'
 
 // We filter document types defined in structure to prevent
 // them from being listed twice
-const hiddenDocTypes = listItem =>
-  !['recipe', 'recipeIngredient'].includes(listItem.getId())
+const hiddenDocTypes = listItem => !['recipe', 'recipeIngredient'].includes(listItem.getId())
 
 export default () =>
   S.list()
@@ -15,9 +14,5 @@ export default () =>
         .icon(MdDashboard)
         .schemaType('recipe')
         .child(S.documentTypeList('recipe').title('Recipe')),
-      S.listItem()
-        .title('Ingredients')
-        .schemaType('ingredient')
-        .child(S.documentTypeList('ingredient').title('Ingredient')),
       ...S.documentTypeListItems().filter(hiddenDocTypes)
     ])
