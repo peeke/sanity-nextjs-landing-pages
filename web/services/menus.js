@@ -5,10 +5,12 @@ export const getMenu = slug => {
   const query = groq`*[_type == $type && slug.current == $slug][0]{
     items[] {
       title,
-      "href": "/" + href->_type + "/" + href->slug.current,
+      "href": "/" + href->_type + "/[slug]",
+      "as": "/" + href->_type + "/" + href->slug.current,
       items[] {
         title,
-        "href": "/" + href->_type + "/" + href->slug.current
+        "href": "/" + href->_type + "/[slug]",
+        "as": "/" + href->_type + "/" + href->slug.current,
       }
     }
   }`;
