@@ -21,11 +21,13 @@
     "@sanity/desk-tool": "^0.x",
     "@sanity/production-preview": "^0.141.5",
     "bcp47": "^1.1.2",
+    "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "sanity-plugin-dashboard-widget-document-list": "^0.0.8",
-    "sanity-plugin-dashboard-widget-netlify": "^1.0.1"
+    "sanity-plugin-dashboard-widget-netlify": "^1.0.1",
+    "unsplash-js": "^5.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",

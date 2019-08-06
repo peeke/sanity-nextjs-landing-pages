@@ -11,6 +11,7 @@ import recipe from './documents/recipe'
 
 // Object types
 import figure from './objects/figure'
+import hero from './objects/hero'
 import internalLink from './objects/internalLink'
 import link from './objects/link'
 import menuItem from './objects/menuItem'
@@ -25,6 +26,7 @@ export default createSchema({
   // to the ones provided by any plugins that are installed
   types: schemaTypes.concat([
     figure,
+    hero,
     ingredient,
     internalLink,
     link,

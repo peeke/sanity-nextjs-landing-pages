@@ -48,6 +48,11 @@ export default {
       description: "Describe the recipe with all the flair you've got."
     },
     {
+      name: 'hero',
+      type: 'hero',
+      title: 'Hero'
+    },
+    {
       name: 'ingredients',
       type: 'array',
       title: 'Ingredients',

@@ -1,0 +1,24 @@
+.input {
+  composes: textInput from 'part:@sanity/base/theme/forms/text-input-style';
+}
+
+.results {
+  display: flex;
+
+  & > * {
+    flex: 1 1 auto;
+  }
+
+  & button {
+    appearance: none;
+    padding: 0;
+    background: transparent;
+    border: 0;
+  }
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  display: block;
+}

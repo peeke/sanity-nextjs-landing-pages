@@ -14,6 +14,7 @@ export function getRecipes() {
 const recipeDetail = `{
   title,
   description,
+  hero,
   duration {
     preperationTime,
     waitingTime
