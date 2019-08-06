@@ -1,11 +1,13 @@
 import groq from "groq";
 import client from "client";
 
+const recipeLink = `{
+  title,
+  "slug": slug.current,
+}`;
+
 export function getRecipes() {
-  const query = groq`*[_type == $type && !(_id in path("drafts.**"))]{
-    title,
-    "slug": slug.current,
-  }`;
+  const query = groq`*[_type == $type && !(_id in path("drafts.**"))]${recipeLink}`;
   return client.fetch(query, { type: "recipe" });
 }
 
@@ -15,6 +17,7 @@ const recipeDetail = `{
   title,
   description,
   hero,
+  tags[],
   duration {
     preperationTime,
     waitingTime
@@ -36,4 +39,19 @@ export function getRecipeDetailBySlug(slug) {
 export function getRecipeDetailById(id) {
   const query = groq`*[_id == $id][0]${recipeDetail}`;
   return client.fetch(query, { id });
+}
+
+export function getRecipesInCategory(category) {
+  const query = groq`*[_type == $type && $category in categories && !(_id in path("drafts.**"))]${recipeLink}`;
+  return client.fetch(query, { type: "recipe", category });
+}
+
+export function getRecipeCategories() {
+  const query = groq`*[_type == $type && !(_id in path("drafts.**"))]{
+    categories[]
+  }`;
+  return client.fetch(query, { type: "recipe" }).then(result => {
+    const categories = result.reduce((result, recipe) => result.concat(recipe.categories), []);
+    return Array.from(new Set(categories));
+  });
 }

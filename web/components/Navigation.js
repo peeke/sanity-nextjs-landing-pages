@@ -10,6 +10,11 @@ export default function Navigation({ items }) {
           <a className={styles.menuItem}>Home</a>
         </Link>
       </li>
+      <li>
+        <Link href="/recipe/category">
+          <a className={styles.menuItem}>Categories</a>
+        </Link>
+      </li>
       {items.map((item, i) => (
         <Submenu key={i} {...item} />
       ))}

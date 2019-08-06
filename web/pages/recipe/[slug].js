@@ -22,12 +22,25 @@ class Recipe extends Component {
   };
 
   render() {
-    const { title, hero, description, duration = {}, ingredients = [], steps = [] } = this.props;
+    const {
+      title,
+      tags = [],
+      hero,
+      description,
+      duration = {},
+      ingredients = [],
+      steps = []
+    } = this.props;
 
     return (
       <Layout>
         <h1>{title}</h1>
         <SimpleBlockContent blocks={description.blocks} />
+        {Boolean(tags.length) && (
+          <p>
+            <strong>Tags</strong>: {tags.join(", ")}
+          </p>
+        )}
         <img src={hero.image} />
         <p>
           Preparation time: {duration.preperationTime} minutes
